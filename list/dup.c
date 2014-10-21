@@ -170,10 +170,11 @@ int fromLast(node *head, int n){
 int isPalin(node **left, node * right){
     int out=0;
     if(right == NULL)
-        return 1;
+        return 0;
     out = isPalin(left, right->next);
     if(out)
         return 1;
+    printf("left %d right %d\n", (*left)->val, right->val);
     if((*left)->val != right->val)
         return 1;
     *left = (*left)->next;
@@ -186,15 +187,27 @@ void isPalinHelper(node * head){
     }
 }
 
+int getMid(node * head){
+    node * slow, * fast;
+    slow = fast = head;
+    if(head == NULL)
+        return -1;
+    while(fast != NULL && fast->next != NULL){
+        fast = fast->next->next;
+        if(fast != NULL)
+        slow = slow->next;
+    }
+    return slow->val;
+}
+
 int main(){
     node * head = NULL;
     head = addNode(head, 1, 0);
     head = addNode(head, 2, 0);
     head = addNode(head, 3, 0);
     head = addNode(head, 4, 0);
-    head = addNode(head, 3, 0);
-    head = addNode(head, 2, 0);
-    head = addNode(head, 1, 0);
+    head = addNode(head, 5, 0);
+    head = addNode(head, 6, 0);
     //head = addNode(head, 8, 0);
     //printList(head);
     //delDup(head);
@@ -202,7 +215,8 @@ int main(){
     //head = revaltn(head, 3);
     //printf("%d\n", loopCheck(head));
     //fromLast(head, 2);
-    isPalinHelper(head);
+    //isPalinHelper(head);
+    printf("mid is %d\n", getMid(head));
     //printList(head);
 }
 
