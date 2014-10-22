@@ -16,8 +16,16 @@ void strrev(char * str){
     }
 }
 
+void ifrev(char * str1, char *str2){
+char check[50] = {0};
+strncat(str1, str2, 50);
+printf("%s\n", str1);
+}
+
 int main(){
-    char str[11]="this is it";
-    strrev(str);
+    char str[11]="palindrome";
+    char str1[11]="ndromepali";
+    //strrev(str);
+    ifrev(str, str1);
     printf("%s\n", str);
 }
