@@ -200,6 +200,37 @@ int getMid(node * head){
     return slow->val;
 }
 
+node * revgiter(node *head, int n){
+    if(head == NULL)
+        return NULL;
+    node * current, *prev, *next, *link=NULL;
+    int k=0;
+    current = head;
+    prev = NULL;
+    while((current != NULL)){
+        printf("k is %d\n", k);
+        next = current ->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+        if(k%n==0){
+            if(link)
+                link->next = prev;
+            link = prev;
+            //link->next = NULL;
+            //prev = NULL;
+        }
+        if(k<n){
+            head = prev;
+            printf("head is %p\n", head);
+        }
+        if(link)
+            link->next = NULL;
+        k++;
+    }
+    return head;
+}
+
 int main(){
     node * head = NULL;
     head = addNode(head, 1, 0);
@@ -207,7 +238,10 @@ int main(){
     head = addNode(head, 3, 0);
     head = addNode(head, 4, 0);
     head = addNode(head, 5, 0);
-    head = addNode(head, 6, 0);
+    //head = addNode(head, 6, 0);*/
+    printList(head);
+    recrev(&head);
+    printList(head);
     //head = addNode(head, 8, 0);
     //printList(head);
     //delDup(head);
@@ -216,7 +250,7 @@ int main(){
     //printf("%d\n", loopCheck(head));
     //fromLast(head, 2);
     //isPalinHelper(head);
-    printf("mid is %d\n", getMid(head));
+    //printf("mid is %d\n", getMid(head));
     //printList(head);
 }
 
