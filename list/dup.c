@@ -56,19 +56,22 @@ while (track){
 return head;
 }
 
-void recrev(node ** head){
-    node * first, *next;
+node * recrev(node ** head){
+    node * first, *next, *newHead;
     if (*head == NULL)
-        return;
+        return NULL;
     else{
         first = *head;
         next = (*head)->next;
+        //printf("next is %p\n", next);
         if(next == NULL)
-            return;
-        recrev(&next);
+            return *head;
+        newHead = recrev(&next);
         first->next->next = first;
         first->next = NULL;
-        *head = next;
+        //printf("rest is %p\n", next);
+        //*head = next;
+        return newHead;
     }
 }
 
@@ -240,7 +243,7 @@ int main(){
     head = addNode(head, 5, 0);
     //head = addNode(head, 6, 0);*/
     printList(head);
-    recrev(&head);
+    head = recrev(&head);
     printList(head);
     //head = addNode(head, 8, 0);
     //printList(head);

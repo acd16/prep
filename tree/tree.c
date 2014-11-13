@@ -166,20 +166,32 @@ int hasLeafSum(leaf* root, int sum){
     }
 }
 
+int isBstUtil(leaf * root, int min, int max){
+    if (root == NULL)
+        return 1;
+    if(root->value < min || root->value > max)
+        return 0;
+    return isBstUtil(root->left, min, root->value) & isBstUtil(root->right, root->value, max);
+}
+
+int isBst(leaf * root){
+    return isBstUtil(root, INT_MIN, INT_MAX);
+}
 int main(){
     int sum = 0, pathMax = INT_MIN;
     leaf * root = NULL;
     root = insert(50);
-    root->left = insert(17);
-    root->left->right  = insert(23);
-    root->left->left = insert(12);
-    root->left->left->left = insert(9);
-    root->left->left->right = insert(14);
-    root->left->right->right  = insert(19);
+    root->left = insert(30);
+    root->left->right  = insert(32);
+    root->left->left = insert(25);
+    root->left->left->left = insert(22);
+    root->left->left->right = insert(27);
+    root->left->right->right  = insert(34);
     root->right = insert(72);
-    root->right->left = insert(54);
-    root->right->right = insert(-7);
-    printf("%d\n", hasLeafSum(root, 175));
+    root->right->left = insert(70);
+    root->right->right = insert(77);
+    printf("%d\n", isBst(root));
+    //printf("%d\n", hasLeafSum(root, 175));
     /*leaf * gg = malloc(sizeof(leaf));
     findMaxLeafSum(root, 0, &pathMax, &gg);
     printf("\nmaxsum = %d\n", pathMax);
