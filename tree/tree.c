@@ -177,6 +177,11 @@ int isBstUtil(leaf * root, int min, int max){
 int isBst(leaf * root){
     return isBstUtil(root, INT_MIN, INT_MAX);
 }
+
+int sumPathDelete(leaf * root){
+
+}
+
 int main(){
     int sum = 0, pathMax = INT_MIN;
     leaf * root = NULL;
